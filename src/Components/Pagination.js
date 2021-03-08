@@ -20,7 +20,6 @@ const Pagination = ({postPerPage, totalPosts, paginate}) => {
                             </li>
                         ))}
                 </ul>
-                {console.log("Pagination")}
             </nav>
             
     );

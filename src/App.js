@@ -16,13 +16,13 @@ function App() {
 
   const [data, setData] = useState([]);
   const [query, setQuery] = useState('');
-
+  const [recipe, setRecipe] = useState([]);
   //state for pagination
 
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage] = useState(5);
-  
+  const [showFullRecipe, setShowFullRecipe] = useState(false);
 
   //pagination calcs
 
@@ -32,11 +32,20 @@ function App() {
 
   //----functions----
 
-  const showFullRecpe = () => {
-
+  const clearSearch = () => {
+    setQuery('');
   }
 
 
+  const showFullRecpe = (recipe) => {
+    setRecipe(recipe)
+    setShowFullRecipe(true);
+    
+  }
+  // const takeReipe = ({recipe}) => {
+    
+  //   setRecipe(recipe);
+  // }
 
   //Change Page
 
@@ -46,17 +55,14 @@ function App() {
 
   //Api call
 
-  let actualCall = () => {
-  }
-  
-        actualCall = async (e) => {
+        const actualCall = async (e) => {
           e.preventDefault();
         try {
             setLoading(true);
             const result = await axios(`https://forkify-api.herokuapp.com/api/search?q=${query}`);
             setData(result.data.recipes);
             setLoading(false);
-            console.log("ApiCall Click")
+            clearSearch();
         } catch (error) {
             console.log(error);
     }
@@ -67,10 +73,11 @@ function App() {
       
         <Header actualCall={actualCall} setQuery={setQuery} query={query}/>
         <ul className="results__list">
-          <Results data={currentPosts} loading={loading}/>
+          <Results data={currentPosts} loading={loading} showFullRecpe={showFullRecpe} />
           <Pagination postPerPage={postPerPage} totalPosts={data.length} paginate={paginate}/>
         </ul>
-        <FullResult data={data} showFullRecpe={showFullRecpe}/>
+        {/* {showFullRecipe && <FullResult recipe={recipe} />} */}
+        { showFullRecipe && <FullResult recipe={recipe}/>}
     </div>
     
   );

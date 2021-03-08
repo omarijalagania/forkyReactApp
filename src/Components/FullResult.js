@@ -2,14 +2,10 @@ import React from 'react';
 
 
 
-const FullResult = ({data}) => {
-
-    const recipe = data.map((recipe) => {
-        return recipe;
-    })
+const FullResult = ({recipe}) => {
 
     return(
-        <> 
+        <>
                 <div className="recipe">    
                 <figure className="recipe__fig">
                     <img src={recipe.image_url} alt="Tomato" className="recipe__img"/>
@@ -52,7 +48,7 @@ const FullResult = ({data}) => {
                 </div>
                 <div className="recipe__ingredients">
                     <ul className="recipe__ingredient-list">
-                        <li className="recipe__item">
+                        <li key={recipe.recipe_id} className="recipe__item">
                             <svg className="recipe__icon">
                                 <use href="img/icons.svg#icon-check"></use>
                             </svg>
@@ -126,7 +122,7 @@ const FullResult = ({data}) => {
                         This recipe was carefully designed and tested by
                         <span className="recipe__by">{recipe.publisher}</span>. Please check out directions at their website.
                     </p>
-                    <a className="btn-small recipe__btn" href={recipe.publisher_url} target="_blank">
+                    <a className="btn-small recipe__btn" href={recipe.publisher_url} >
                         <span>Directions</span>
                         <svg className="search__icon">
                             <use href="img/icons.svg#icon-triangle-right"></use>

@@ -8,7 +8,7 @@ const Header = ({actualCall, setQuery, query}) => {
     return(
         <>
             <header className="header">
-            <img src="img/logo.png" alt="Logo" className="header__logo"/>
+            <img src="img/logo.png" alt="Logo" className="header__logo" />
             <form className="search">
                 <input type="text" className="search__field" placeholder="Search over 1,000,000 recipes..." onChange={(e) => setQuery(e.target.value)} value={query}/>
                 <button onClick={actualCall}
