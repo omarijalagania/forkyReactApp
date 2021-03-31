@@ -1,13 +1,11 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Header from './Components/Header';
 import Pagination from './Components/Pagination';
-
+//import context 
+import { Context } from './Components/Context';
 import axios from 'axios';
 import Results from './Components/Results';
 import FullResult from './Components/FullResult';
-
-
-
 
 
 function App() {
@@ -29,8 +27,9 @@ function App() {
   const indexOfLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
   const currentPosts = data.slice(indexOfFirstPost, indexOfLastPost);
-
+  const totalPosts=data.length;
   //----functions----
+
 
   const clearSearch = () => {
     setQuery('');
@@ -69,16 +68,17 @@ function App() {
         }
 
   return (
-    <div className="container">
-      
-        <Header actualCall={actualCall} setQuery={setQuery} query={query}/>
-        <ul className="results__list">
-          <Results data={currentPosts} loading={loading} showFullRecpe={showFullRecpe} />
-          <Pagination postPerPage={postPerPage} totalPosts={data.length} paginate={paginate}/>
-        </ul>
-        {/* {showFullRecipe && <FullResult recipe={recipe} />} */}
-        { showFullRecipe && <FullResult recipe={recipe}/>}
-    </div>
+    <Context.Provider value={{currentPosts, loading, showFullRecpe, actualCall, setQuery, query, postPerPage, totalPosts, paginate, recipe}}>
+      <div className="container">
+          <Header />
+          <ul className="results__list">
+            <Results />
+            <Pagination />
+          </ul>
+          {/* {showFullRecipe && <FullResult recipe={recipe} />} */}
+          { showFullRecipe && <FullResult />}
+      </div>
+    </Context.Provider>
     
   );
 }

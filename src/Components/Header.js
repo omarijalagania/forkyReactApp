@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Context } from './Context';
 
 
 
-const Header = ({actualCall, setQuery, query}) => {
+const Header = () => {
 
+    const {actualCall, setQuery, query} = useContext(Context)
 
     return(
         <>

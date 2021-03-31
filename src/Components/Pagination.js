@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import {Context} from './Context';
 
+const Pagination = () => {
 
-const Pagination = ({postPerPage, totalPosts, paginate}) => {
+    const {postPerPage, totalPosts, paginate} = useContext(Context);
 
     const pageNumbers = [];
 

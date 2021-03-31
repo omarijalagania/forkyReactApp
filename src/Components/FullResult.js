@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import {Context} from './Context';
 
 
+const FullResult = () => {
 
-const FullResult = ({recipe}) => {
+    const {recipe} = useContext(Context);
 
     return(
         <>
